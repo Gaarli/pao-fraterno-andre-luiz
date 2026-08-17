@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel de Gestão Logística - ONG</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>🌍 Painel de Gestão Logística</h1>
+    <p class="subtitle">Mapa de calor de visitas e controle de estoque em tempo real</p>
+  </header>
+
+  <main class="container">
+    <!-- MAPA DE CALOR -->
+    <section class="panel" id="painel-mapa">
+      <div class="panel-header">
+        <h2>🔥 Mapa de Calor de Visitas</h2>
+        <button id="btn-atualizar-mapa" class="btn btn-secundario" type="button">Atualizar</button>
+      </div>
+
+      <form id="form-visita" class="form-inline">
+        <select id="select-regiao" required>
+          <option value="" disabled selected>Selecione uma região...</option>
+        </select>
+        <input type="text" id="input-observacao" placeholder="Observação (opcional)" maxlength="120" />
+        <button type="submit" class="btn btn-primario">Registrar Visita</button>
+      </form>
+
+      <div id="legenda-calor" class="legenda">
+        <span>Frio (esquecida)</span>
+        <div class="barra-gradiente"></div>
+        <span>Quente (muito visitada)</span>
+      </div>
+
+      <div id="grid-regioes" class="grid-regioes">
+        <p class="carregando">Carregando regiões...</p>
+      </div>
+    </section>
+
+    <!-- ESTOQUE -->
+    <section class="panel" id="painel-estoque">
+      <div class="panel-header">
+        <h2>📦 Gerenciador de Estoque</h2>
+        <button id="btn-novo-item" class="btn btn-primario" type="button">+ Novo Item</button>
+      </div>
+
+      <div class="filtro-estoque">
+        <input type="text" id="input-busca" placeholder="Buscar item no estoque..." />
+      </div>
+
+      <div class="tabela-wrapper">
+        <table id="tabela-estoque">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Categoria</th>
+              <th>Qtd.</th>
+              <th>Unid.</th>
+              <th>Mínimo</th>
+              <th>Atualizado em</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="corpo-tabela-estoque">
+            <tr><td colspan="7" class="carregando">Carregando estoque...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODAL DE ITEM DE ESTOQUE -->
+  <div id="modal-item" class="modal oculto">
+    <div class="modal-conteudo">
+      <h3 id="modal-titulo">Novo Item de Estoque</h3>
+      <form id="form-item">
+        <input type="hidden" id="item-id" />
+
+        <label for="item-nome">Nome do item</label>
+        <input type="text" id="item-nome" placeholder="Ex: Feijão" required />
+
+        <label for="item-categoria">Categoria</label>
+        <input type="text" id="item-categoria" placeholder="Ex: Alimentos" />
+
+        <div class="linha-dupla">
+          <div>
+            <label for="item-quantidade">Quantidade</label>
+            <input type="number" id="item-quantidade" min="0" step="0.01" required />
+          </div>
+          <div>
+            <label for="item-unidade">Unidade</label>
+            <input type="text" id="item-unidade" placeholder="kg, un, l..." required />
+          </div>
+        </div>
+
+        <label for="item-minimo">Estoque mínimo (alerta)</label>
+        <input type="number" id="item-minimo" min="0" step="0.01" value="0" />
+
+        <div class="modal-acoes">
+          <button type="button" id="btn-cancelar-item" class="btn btn-secundario">Cancelar</button>
+          <button type="submit" class="btn btn-primario">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast oculto"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

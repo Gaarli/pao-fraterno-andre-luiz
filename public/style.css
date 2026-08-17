@@ -1,0 +1,232 @@
+:root {
+  --cor-fundo: #f3f4f6;
+  --cor-primaria: #2563eb;
+  --cor-secundaria: #6b7280;
+  --cor-perigo: #ef4444;
+  --cor-sucesso: #22c55e;
+  --cor-texto: #1f2937;
+  --cor-card: #ffffff;
+  --sombra: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --raio: 10px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  line-height: 1.5;
+}
+
+.topbar {
+  background: linear-gradient(135deg, var(--cor-primaria), #7c3aed);
+  color: #fff;
+  padding: 24px 32px;
+}
+
+.topbar h1 { font-size: 1.6rem; margin-bottom: 4px; }
+.subtitle { opacity: 0.9; font-size: 0.95rem; }
+
+.container {
+  max-width: 1200px;
+  margin: 24px auto;
+  padding: 0 20px 40px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 1024px) {
+  .container { grid-template-columns: 1.1fr 1fr; align-items: start; }
+}
+
+.panel {
+  background: var(--cor-card);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  padding: 20px;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.panel-header h2 { font-size: 1.2rem; }
+
+/* Botões */
+.btn {
+  border: none;
+  border-radius: 6px;
+  padding: 9px 14px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+}
+.btn:hover { opacity: 0.9; }
+.btn:active { transform: scale(0.97); }
+
+.btn-primario { background: var(--cor-primaria); color: #fff; }
+.btn-secundario { background: #e5e7eb; color: var(--cor-texto); }
+.btn-icone { background: transparent; padding: 4px 8px; font-size: 1rem; }
+
+/* Formulário de visita */
+.form-inline {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.form-inline select,
+.form-inline input {
+  flex: 1;
+  min-width: 140px;
+  padding: 9px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+/* Legenda de calor */
+.legenda {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.78rem;
+  color: var(--cor-secundaria);
+  margin-bottom: 16px;
+}
+
+.barra-gradiente {
+  flex: 1;
+  height: 10px;
+  border-radius: 6px;
+  background: linear-gradient(to right, #3b82f6, #facc15, #ef4444);
+}
+
+/* Grid de regiões (mapa de calor) */
+.grid-regioes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.card-regiao {
+  border-radius: 8px;
+  padding: 14px;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  min-height: 92px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.15s ease;
+}
+.card-regiao:hover { transform: translateY(-2px); }
+.card-regiao h3 { font-size: 0.95rem; margin-bottom: 6px; }
+.total-visitas { font-size: 1.15rem; font-weight: 700; }
+.ultima-visita { font-size: 0.7rem; opacity: 0.9; }
+
+/* Estoque */
+.filtro-estoque { margin-bottom: 12px; }
+.filtro-estoque input {
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.tabela-wrapper { overflow-x: auto; }
+
+table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+thead th {
+  text-align: left;
+  padding: 10px 8px;
+  border-bottom: 2px solid #e5e7eb;
+  color: var(--cor-secundaria);
+  font-weight: 600;
+  white-space: nowrap;
+}
+tbody td { padding: 10px 8px; border-bottom: 1px solid #f0f1f3; }
+tbody tr:hover { background: #f9fafb; }
+
+.linha-alerta { background: #fef2f2; }
+.linha-alerta:hover { background: #fee2e2; }
+
+.acoes-tabela { display: flex; gap: 4px; white-space: nowrap; }
+
+.carregando { text-align: center; color: var(--cor-secundaria); padding: 16px; }
+
+/* Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 16px;
+}
+.modal.oculto { display: none; }
+
+.modal-conteudo {
+  background: #fff;
+  border-radius: var(--raio);
+  padding: 24px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: var(--sombra);
+}
+.modal-conteudo h3 { margin-bottom: 16px; }
+
+.modal-conteudo label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--cor-secundaria);
+  margin: 10px 0 4px;
+}
+.modal-conteudo input {
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.linha-dupla { display: flex; gap: 10px; }
+.linha-dupla > div { flex: 1; }
+
+.modal-acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px 18px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.9rem;
+  box-shadow: var(--sombra);
+  z-index: 100;
+}
+.toast.sucesso { background: var(--cor-sucesso); }
+.toast.erro { background: var(--cor-perigo); }
+.toast.oculto { display: none; }
